@@ -1,22 +1,9 @@
 # Getting and Cleaning Data, Course Project, Coursera
-# 8/23/2014
-# Wataru Uegami
-
-# You should create one R script called run_analysis.R that does the following. 
-
-# 1) Merges the training and the test sets to create one data set.
-# 2) Extracts only the measurements on the mean and standard deviation 
-#    for each measurement. 
-# 3) Uses descriptive activity names to name the activities in the data set
-# 4) Appropriately labels the data set with descriptive variable names. 
-# 5) Creates a second, independent tidy data set with the average of each 
-#    variable for each activity and each subject. 
-
 
 # set working directory
 setwd("~/Dropbox/R_related_files/GettingCleaningData")
 
-# 1) Merges the training and the test sets to create one data set.
+# STEP1) Merges the training and the test sets to create one data set.
 
 # read X_test.txt file as numeric vector of 1,653,267 (= 561 x 2947)
 x_test <- scan('UCI HAR Dataset/test/X_test.txt')
@@ -69,7 +56,7 @@ dim(data) # [1] 10299   563   (10299 = 2947 + 7352)
 rm(test, training)
 
 
-# 2) Extracts only the measurements on the mean and standard deviation 
+# STEP2) Extracts only the measurements on the mean and standard deviation 
 #    for each measurement. 
 
 # read 'features.txt' (561 obs.)
@@ -89,7 +76,7 @@ exData <- data[, tf]
 rm(tf, data)
 dim(exData)       # [1] 10299    81
 
-# 3) Uses descriptive activity names to name the activities in the data set
+# STEP3) Uses descriptive activity names to name the activities in the data set
 
 # read a file
 activity_label <- read.table(file = 'UCI HAR Dataset/activity_labels.txt')
@@ -100,12 +87,12 @@ exData <- merge(activity_label, exData, by = "labels")
 dim(exData)     # [1] 10299    82 (= 81 + 1)
 rm(activity_label)      # remove an object
 
-# 4) Appropriately labels the data set with descriptive variable names. 
+# STEP4) Appropriately labels the data set with descriptive variable names. 
 head(names(exData), 10)
 names(exData) <- gsub("-|\\()", "", names(exData))
 head(names(exData), 10)
 
-# 5) Creates a second, independent tidy data set with the average of each 
+# STEP5) Creates a second, independent tidy data set with the average of each 
 #    variable for each activity and each subject. 
 
 # melt a data
