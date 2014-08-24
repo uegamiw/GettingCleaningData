@@ -1,8 +1,5 @@
 # Getting and Cleaning Data, Course Project, Coursera
 
-# set working directory
-setwd("~/Dropbox/R_related_files/GettingCleaningData")
-
 # STEP1) Merges the training and the test sets to create one data set.
 
 # read X_test.txt file as numeric vector of 1,653,267 (= 561 x 2947)
@@ -82,7 +79,7 @@ dim(exData)       # [1] 10299    81
 activity_label <- read.table(file = 'UCI HAR Dataset/activity_labels.txt')
 names(activity_label) <- c('labels', 'activity'); activity_label
 
-# merge???(link label and descriptive activity)
+# merge (link label and descriptive activity)
 exData <- merge(activity_label, exData, by = "labels")
 dim(exData)     # [1] 10299    82 (= 81 + 1)
 rm(activity_label)      # remove an object
